@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Disease Detect</title>
+    <style>
+        /* Basic styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background: linear-gradient(to bottom right, #e0f7fa, #f1f8e9);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .header {
+            background-color: #388e3c;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        .main-content {
+            display: flex;
+            flex: 1;
+            padding: 1rem;
+            gap: 1rem;
+            width: 100%;
+            justify-content: center;
+        }
+        .sidebar {
+            width: 260px;
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .sidebar li {
+            margin-bottom: 1rem;
+        }
+        .sidebar button {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 0.5rem 1rem;
+            border: none;
+            background-color: #e8f5e9;
+            color: #388e3c;
+            font-size: 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .sidebar button:hover {
+            background-color: #c8e6c9;
+        }
+        .sidebar button.active {
+            background-color: #388e3c;
+            color: #fff;
+        }
+        .content-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+        h2 {
+            color: #388e3c;
+            margin-top: 15px;
+        }
+        .upload-card {
+            width: 150px;
+            height: 120px;
+            border: 2px solid #388e3c;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin-top: 15px;
+            background-color: #fff;
+        }
+        .upload-card img {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 10px;
+        }
+        .upload-card span {
+            color: #388e3c;
+            font-size: 0.9rem;
+        }
+        .upload-card input[type="file"] {
+            display: none;
+        }
+        .analyze-button {
+            margin-top: 15px;
+            padding: 0.5rem 1rem;
+            background-color: #388e3c;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            display: none;
+        }
+        .analyze-button:hover {
+            background-color: #2e7d32;
+        }
+        .image-preview {
+            height: 40%;
+            width: 40%;
+            border-radius: 5px;
+            display: none;
+        }
+        .result {
+            margin-top: 15px;
+            font-size: 1.2rem;
+            color: #388e3c;
+            text-align: center;
+           
+        }
+        .footer {
+            text-align: center;
+            padding: 0.5rem;
+            background-color: #388e3c;
+            color: #fff;
+            width: 100%;
+        }
+        .loading-bar {
+            margin-top: 15px;
+            width: 100px;
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+            display: none;
+        }
+        .loading-bar div {
+            width: 0;
+            height: 100%;
+            background-color: #388e3c;
+            animation: loading 1s infinite;
+        }
+        @keyframes loading {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>PlantBot Assistant - Detect Disease</h1>
+    </header>
+    <div class="main-content">
+        <nav class="sidebar">
+            <ul>
+                <li>
+                    <button onclick="location.href='/chatbot'">General Chat</button>
+                </li>
+                <li>
+                    <button onclick="location.href='/plant'" class="active">Plant Disease Detection</button>
+                </li>
+            </ul>
+        </nav>
+        <div class="content-area">
+            <!-- <h2>Plant Disease Detect</h2>
+            <img id="image-preview" class="image-preview" alt="Selected Image Preview">
+
+            <label class="upload-card" for="image-upload">
+                <img src="https://img.icons8.com/ios/50/upload--v1.png" alt="Upload Icon">
+                <span>Select Image</span>
+                <input type="file" accept="image/*" id="image-upload" onchange="handleImageUpload()">
+            </label>
+            <button id="analyze-button" class="analyze-button" onclick="detectDisease()">Analyze</button>
+            <div class="result" id="result"></div> -->
+
+            <h2>Plant Disease Detect</h2>
+            <img id="image-preview" class="image-preview" alt="Selected Image Preview">
+            <label class="upload-card" for="image-upload">
+                <img src="https://img.icons8.com/ios/50/upload--v1.png" alt="Upload Icon">
+                <span>Select Image</span>
+                <input type="file" accept="image/*" id="image-upload" onchange="handleImageUpload()">
+            </label>
+            <button id="analyze-button" class="analyze-button" onclick="detectDisease()">Analyze</button>
+            <div class="result" id="result"></div>
+
+            <div class="loading-bar" id="loading-bar">
+                <div></div>
+            </div>
+    
+        </div>
+    </div>
+    <footer class="footer">
+        <p>© 2024 AndraDeveloper. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function handleImageUpload() {
+            const imageInput = document.getElementById('image-upload');
+            const analyzeButton = document.getElementById('analyze-button');
+            const imagePreview = document.getElementById('image-preview');
+
+            if (imageInput.files && imageInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = 'block';
+                }
+                reader.readAsDataURL(imageInput.files[0]);
+                analyzeButton.style.display = 'block';
+            }
+        }
+
+        async function detectDisease() {
+            const resultDiv = document.getElementById('result');
+            const loadingBar = document.getElementById('loading-bar');
+            const imageInput = document.getElementById('image-upload');
+
+            if (imageInput.files.length > 0) {
+                const formData = new FormData();
+                formData.append('image', imageInput.files[0]);
+
+                // Show loading bar and clear previous results
+                loadingBar.style.display = 'block';
+                resultDiv.textContent = '';
+                
+                try {
+                    const response = await fetch('/submit-vgg', {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        resultDiv.innerHTML = `
+                            <h3>${data.title}</h3>
+                            <p><strong>Description:</strong> ${data.desc}</p>
+                            <p><strong>Prevention:</strong> ${data.prevent}</p>
+                            <a href="${data.buy_link}" target="_blank">Buy Supplement</a>
+                        `;
+                    } else {
+                        resultDiv.textContent = 'Error detecting disease.';
+                    }
+                } catch (error) {
+                    resultDiv.textContent = 'Network error. Please try again.';
+                } finally {
+                    // Hide loading bar
+                    loadingBar.style.display = 'none';
+                }
+            } else {
+                alert('Please upload an image to detect disease.');
+            }
+        }
+    </script>
+</body>
+</html>

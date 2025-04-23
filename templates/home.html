@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block pagetitle %}
+Plant Disease Detection
+{% endblock pagetitle %}
+{% block body %}
+<style>
+  body {
+    overflow-x: hidden;
+  }
+  .custom-card {
+    width: 200px;
+    height: 200px;
+    background: red;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+  }
+  .custom-card i {
+    font-size: 50px;
+    color: white;
+    margin-bottom: 10px;
+  }
+  .custom-card span {
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  .custom-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+  }
+</style>
+
+<div class="row mb-5 text-center text-white laptop">
+    <div class="col-lg-10 mx-auto">
+        <h3 class="display-5" style="padding-top: 10%; font-weight: 400; color: black;"><b>PLANT DISEASE DETECTION</b></h3>
+        <p class="lead" style="font-weight: 500; color: black; font-size: 17px;"></p>
+    </div>
+</div>
+
+<center class="laptop">
+    <div class="d-flex justify-content-center gap-4">
+        <a href="/index">
+            <div class="custom-card"><i class="fas fa-brain"></i><span>VGG16</span></div>
+        </a>
+        <a href="/rnn">
+            <div class="custom-card"><i class="fas fa-sync-alt"></i><span>RNN</span></div>
+        </a>
+        <a href="/vision-transformer">
+            <div class="custom-card"><i class="fas fa-eye"></i><span>Vision Transformer</span></div>
+        </a>
+        <a href="/capsule-network">
+            <div class="custom-card"><i class="fas fa-capsules"></i><span>CapNet</span></div>
+        </a>
+        <a href="/chatbot">
+            <div class="custom-card"><i class="fas fa-message"></i><span>Chatbot</span></div>
+        </a>
+    </div>
+</center>
+
+<!-- <div class="container mt-5">
+  <div class="row justify-content-center gap-3">
+      <div class="custom-card"><i class="fas fa-leaf"></i><span>Leaf 1</span></div>
+      <div class="custom-card"><i class="fas fa-seedling"></i><span>Leaf 2</span></div>
+      <div class="custom-card"><i class="fas fa-spa"></i><span>Leaf 3</span></div>
+      <div class="custom-card"><i class="fas fa-tree"></i><span>Leaf 4</span></div>
+  </div>
+</div> -->
+
+<div class="container mt-5">
+    <div class="row ">
+        <div class="col-3">
+            <div class="rounded p-3  shadow border text-center" style="width: 85%"><img src="../static/uploads/2.png" style="width: 100%;"  alt="" srcset=""></div>
+        </div>
+        <div class="col-3">
+            <div class="rounded p-3 shadow  text-center"  style="width: 85%"><img src="../static/uploads/3.png" style="width: 100%;" alt="" srcset=""></div>
+        </div>
+        <div class="col-3" >
+            <div class="rounded p-3 shadow text-center" style="width: 85%"><img src="../static/uploads/4.png"style="width: 100%;"  alt="" srcset=""></div>
+        </div>
+        <div class="col-3" >
+            <div class="rounded p-3 shadow  text-center" style="width: 85%"><img src="../static/uploads/5.png"style="width: 100%;"  alt="" srcset=""></div>
+        </div>
+    </div>
+
+{% endblock body %}
